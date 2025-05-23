@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+</head>
+
+
+<style>
+  .heading {
+    text-align: center;
+    font-size: 2.5em;
+    color: #000000;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+    margin-top: 20px;
+    box-shadow: 20px 30px 40px 30px #8abece;
+    background-color: #8abece;
+  }
+
+
+
+
+
+  .chat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin: auto;
+    
+   
+  }
+
+
+
+
+
+
+
+
+  .container {
+    padding: 30px;
+    
+    background-color: #630606;
+    padding: 20px;
+    border-radius: 12px;
+    width: 400px;
+    height: 500px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    font-style: inherit;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+    flex-wrap: nowrap;
+    gap: 10px;
+    border: 2px solid #ccc;
+    transition: all 0.3s ease-in-out;
+
+  }
+
+ 
+
+  .message {
+    margin-bottom: 15px;
+    padding: 10px 14px;
+    border-radius: 20px;
+    max-width: 75%;
+    word-wrap: break-word;
+  }
+
+  .left {
+    align-self: flex-start;
+    background-color: #3619192f;
+    text-align: left;
+    border-radius: 10px;
+    padding: 20px;
+
+  }
+
+  .right {
+    align-self: flex-end;
+    background-color: #3619192f;
+    text-align: right;
+    border-radius: 10px;
+  }
+
+  form {
+    margin-top: 20px;
+    display: flex;
+
+    flex-direction: column;
+    width: 350px;
+  }
+
+  form input[type="text"] {
+    margin-top: 10px;
+    padding: 10px;
+    margin-top: 7%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+
+  h1 {
+    padding-right: 110px;
+  }
+
+  .search-box {
+    font-size: 16px;
+    color: #333;
+    padding-bottom: 9%;
+    background-color: #af2a2a;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100px;
+    height: 60px;
+    
+    
+  }
+
+  .search-box:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(46, 107, 173, 0.5);
+    outline: none;
+    
+
+  }
+
+ 
+    
+    
+  
+ 
+
+  button{
+     border-radius: 10px;
+     height: 30px;
+     width: 60px;
+     margin-top: 30px;
+     background-color: #bdc6d0;
+     color: white;
+  }
+  button:hover{
+    background-color: #394857f7;
+  }
+
+  .search {
+    display: flex;
+    flex-direction:row;
+    flex-basis: 20px;
+    gap: 20px;
+    
+      
+    
+    
+  }
+  .one{
+     margin-bottom: 3px;
+     background-color: rgba(59, 55, 55, 0.145);
+     color: black;
+
+  }
+
+
+</style>
+
+<h2 class="heading" style="font-family: Cursive; box-shadow: ;">WELCOME TO THE SWEET BAKERY CHATBOT</h2>
+
+<div class="chat-container">
+
+
+
+  <div class="container" id="chat-container" style="background-color: #aab0e2;">
+
+    {% for speaker, message in chat_history %}
+    <div class="message {% if speaker == 'You' %}right{% else %}left{% endif %}">
+      <strong>{{ speaker }}:</strong><br>{{ message }}
+    </div>
+    {% endfor %}
+
+
+
+
+
+
+  </div>
+  <form method="post">
+   
+    <div class="search">
+      <input class="one"  type="text" name="message" placeholder="enter your message" required>
+      <button type="submit">send</button>
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+  
+    </div>
+    
+   
+
+
+
+
+</div>
+
+<script>
+  // Scroll to bottom on page load
+  window.onload = function () {
+    const chatContainer = document.getElementById("chat-container");
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  };
+</script>
+
+</body>
+</html>
